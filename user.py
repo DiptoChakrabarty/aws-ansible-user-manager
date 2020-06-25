@@ -6,6 +6,7 @@ load_dotenv()
 
 #path=os.getenv("PATH")
 path=""
+key_name=""
 parser = argparse.ArgumentParser()
 parser.add_argument("--ip")
 parser.add_argument("--username")
@@ -30,6 +31,17 @@ try:
     print(cmd)
     stdin, stdout, stderr = client.exec_command(cmd)
     print(stdout.read())
+
+    #transfer file
+    transfer = "scp  -i {} {}  {}@{}:/home/{}/".format(path,path,path,username,ip,username)
+    stdin, stdout, stderr = client.exec_command(trasfer)
+    print(stdout.read())
+
+    #add to authorized keys
+    add = "cat {} >>  /home/{}/.ssh/authorized_keys".format(keyname,username)
+    stdin, stdout, stderr = client.exec_command(add)
+    print(stdout.read())
+
 
     # close the client connection once the job is done
     client.close()
