@@ -1,10 +1,12 @@
-import boto3
+import boto3,os
 import botocore
 import paramiko
 from dotenv import load_dotenv
 load_dotenv()
 
-path=os.getenv("PATH")
+#path=os.getenv("PATH")
+path=""
+print(path)
 key = paramiko.RSAKey.from_private_key_file(path)
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -17,7 +19,9 @@ try:
     client.connect(hostname=instance_ip, username=username, pkey=key)
 
     # Execute a command(cmd) after connecting/ssh to an instance
-    cmd = input("Enter your command : ")
+    user = input("Enter name of user  : ")
+    cmd = "sudo useradd " + user
+    print(cmd)
     stdin, stdout, stderr = client.exec_command(cmd)
     print(stdout.read())
 
