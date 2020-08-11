@@ -4,20 +4,22 @@
   become_method: sudo
   gather_facts: no
   tasks:
+    - name: create group admins
+      group:
+        name: admins
+        state: present
     - name: Add users 
       user:
         name: "{{ item }}"
+        groups: "admins"
         state: present
       with_items:
         - "john"
         - "ron"
-    - name: give sudoe powers
+    - name: give sudo powers
       lineinfile:
         dest: "/etc/sudoers"
         state: present
         regexp: "^%admin"
-        line: "{{ item }} ALL=(ALL) NOPASSWD: ALL"
-      with_items:
-        - "john"
-        - "ron"
-
+        line: "admins ALL=(ALL) NOPASSWD: ALL"
+     
