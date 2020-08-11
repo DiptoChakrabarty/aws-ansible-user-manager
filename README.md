@@ -10,11 +10,24 @@
 - Activate virtual env using source  venv/bin/activate
 - Add your pem file path in ansible.cfg -> private_key_file
 - ssh-add <pem file>
-- In hosts file add in this format { instance ip address}  ansible_ssh_user={ user to connect}  ansible_ssh_private_key_file= { pvt key path }
+- In hosts file add in this format under aws group { instance ip address}  ansible_ssh_user={ user to connect}  ansible_ssh_private_key_file= { pvt key path }
 - For ubuntu user will be ubuntu and centos user is ec2-user
 - Add your users key to add in instance in ssh directory
 - Name the key as  {username}.pub
 - Add all users under the vars users 
+
+```
+
+### key.yml format to launch instances
+```sh
+
+access_key: ""
+secret_key: ""
+region: ""
+ami: ""
+security_group: ""
+subnet: ""
+key_name: ""
 
 ```
 
