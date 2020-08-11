@@ -1,11 +1,12 @@
 - hosts: aws
+  vars_files:
+    - "users.yml"
   connection: ssh
   become: yes
   become_method: sudo
   gather_facts: no
-  vars:
-    users:
-        - "pop"
+  
+    
   tasks:
     - name: create group admins
       group:
@@ -15,12 +16,12 @@
       user:
         name: "{{ item }}"
         groups: "admins"
-        state: present
+        state: "{{ state }}"
       with_items: "{{ users }}"    
     - name: give sudo powers
       lineinfile:
         dest: "/etc/sudoers"
-        state: present
+        state: "{{ state }}"
         regexp: "^%admin"
         line: "{{ item }} ALL=(ALL) NOPASSWD: ALL"
       with_items: "{{ users }}"

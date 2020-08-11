@@ -1,0 +1,4 @@
+- users:
+    - "wick"
+    - "rambo"
+- state: present

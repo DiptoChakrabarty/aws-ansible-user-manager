@@ -14,7 +14,8 @@
 - For ubuntu user will be ubuntu and centos user is ec2-user
 - Add your users key to add in instance in ssh directory
 - Name the key as  {username}.pub
-- Add all users under the vars users 
+- Add all users in users.yml file
+- To add or remove change state variable in users.yml to present or absent
 
 ```
 
