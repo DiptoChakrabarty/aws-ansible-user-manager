@@ -1,0 +1,8 @@
+[localhost]
+localhost ansible_connection=local ansible_python_interpreter=/home/chuck/Desktop/Projects/apache-storm/venv/bin/python3
+
+[aws]
+13.233.108.209  ansible_ssh_private_key_file=/home/chuck/.ssh/Jenkins_Devops.pem 
+
+
+
