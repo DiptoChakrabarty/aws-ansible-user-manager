@@ -3,6 +3,9 @@
   become: yes
   become_method: sudo
   gather_facts: no
+  vars:
+    users:
+        - "pop"
   tasks:
     - name: create group admins
       group:
@@ -13,13 +16,17 @@
         name: "{{ item }}"
         groups: "admins"
         state: present
-      with_items:
-        - "john"
-        - "ron"
+      with_items: "{{ users }}"    
     - name: give sudo powers
       lineinfile:
         dest: "/etc/sudoers"
         state: present
         regexp: "^%admin"
-        line: "admins ALL=(ALL) NOPASSWD: ALL"
+        line: "{{ item }} ALL=(ALL) NOPASSWD: ALL"
+      with_items: "{{ users }}"
+    - name: Add authorized keys
+      authorized_key:
+        user: "{{ item }}"
+        key: "{{ lookup('file', 'ssh/'+ item + '.pub') }}"
+      with_items: "{{ users }}"
      
