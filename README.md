@@ -1,4 +1,4 @@
-# aws-user-adder
+# aws-user-manager
 
 - Add Users in your ec2 server using  public keys and ip address 
 - Also add your keys to the instance
