@@ -23,8 +23,7 @@
         dest: "/etc/sudoers"
         state: "{{ state }}"
         regexp: "^%admin"
-        line: "{{ item }} ALL=(ALL) NOPASSWD: ALL"
-      with_items: "{{ users }}"
+        line: "%admins ALL=(ALL) NOPASSWD: ALL"
       when: state == "present"
     - name: Add authorized keys
       authorized_key:
